@@ -1,0 +1,11 @@
+# Ignorer l'environnement virtuel
+ProjetDjango/bin/
+ProjetDjango/lib/
+ProjetDjango/lib64/
+ProjetDjango/Lib
+ProjetDjango/Include
+ProjetDjango/Scripts
+
+
+# Ignorer les fichiers statiques générés
+staticfiles/
