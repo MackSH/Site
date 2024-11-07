@@ -75,13 +75,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'Cluster0',
+        'ENFORCE_SCHEMA': False,  # C'est optionnel, mais utile pour certains cas
+        'CLIENT': {
+            'host': 'mongodb+srv://mackensonsh:nD80IFQYzLbYO4G6@cluster0.kbwp1.mongodb.net/test?retryWrites=true&w=majority',
+            'authSource': 'admin',  # Si nécessaire
+        },
     }
 }
 
+
+# nD80IFQYzLbYO4G6
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
