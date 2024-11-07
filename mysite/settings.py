@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from mongoengine import connect
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
+    'mongoengine.django.mongo_auth',
 ]
 
 MIDDLEWARE = [
@@ -81,18 +84,33 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Cluster0',
-        'ENFORCE_SCHEMA': False,  # C'est optionnel, mais utile pour certains cas
-        'CLIENT': {
-            'host': 'mongodb+srv://mackensonsh:nD80IFQYzLbYO4G6@cluster0.kbwp1.mongodb.net/test?retryWrites=true&w=majority',
-            'authSource': 'admin',  # Si nécessaire
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'Cluster0',
+#         'ENFORCE_SCHEMA': False,  # C'est optionnel, mais utile pour certains cas
+#         'CLIENT': {
+#             'host': 'mongodb+srv://mackensonsh:nD80IFQYzLbYO4G6@cluster0.kbwp1.mongodb.net/test?retryWrites=true&w=majority',
+#             'authSource': 'admin',  # Si nécessaire
+#         },
+#     }
+# }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.dummy',  # Laissez ceci comme un "dummy" car MongoEngine gère la connexion
+#         'NAME': 'your_db_name',  # Remplacez par le nom de votre base de données MongoDB
+#         'HOST': 'mongodb://localhost:27017',  # L'URL de connexion à votre MongoDB
+#     }
+# }
+
+connect(
+    db="Cluster0",
+    username="mackensonsh",
+    password="nD80IFQYzLbYO4G6",
+    host="mongodb+srv://cluster0.kbwp1.mongodb.net/test?retryWrites=true&w=majority",
+    authentication_source="admin"  # Si nécessaire
+)
 
 # nD80IFQYzLbYO4G6
 

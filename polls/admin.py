@@ -1,20 +1,12 @@
 from django.contrib import admin
+from mongoengine.django.admin import DocumentAdmin
+from .models import Question, Choice
 
-# Register your models here.
-from .models import Choice, Question
+# Enregistrez les modèles MongoEngine avec l'admin Django
+@admin.register(Question)
+class QuestionAdmin(DocumentAdmin):
+    pass
 
-class ChoiceAdmin(admin.ModelAdmin):
-    list_display = [
-        'question',
-        'choice_text',
-        'vote',
-    ]
-
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = [
-        'question_text',
-        'pub_date',
-    ]
-
-admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choice, ChoiceAdmin)
+@admin.register(Choice)
+class ChoiceAdmin(DocumentAdmin):
+    pass

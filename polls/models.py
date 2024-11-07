@@ -1,18 +1,18 @@
-from django.db import models
+from mongoengine import Document, StringField, DateTimeField, IntField, ReferenceField
 
-# Create your models here.
+# Modèle Question
+class Question(Document):
+    question_text = StringField(max_length=200)
+    pub_date = DateTimeField()
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField("date published")
-    
     def __str__(self):
         return self.question_text
-    
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    vote = models.IntegerField(default=0)
-    
+
+# Modèle Choice
+class Choice(Document):
+    question = ReferenceField(Question, reverse_delete_rule=4)  # reverse_delete_rule=4 simule l'on_delete=models.CASCADE
+    choice_text = StringField(max_length=200)
+    vote = IntField(default=0)
+
     def __str__(self):
         return self.choice_text
